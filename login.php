@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<?php
+?>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/css.css">
 </head>
-
 <body>
     <div class="centro900">
         <div class="boxlogin">
@@ -27,7 +26,7 @@
                     <button type="submit" name="btn-entrar" class="btn btn-primary">Entrar</button>
                     <button type="button" class="btn btn-secondary" onclick="window.location='cadastrousuario.html';">Cadastrar-se</button>
                 </form>
-
+             
             </div>
             <div class="rodape"> Seja bem vindo a LoCar Veículos!!!</div>
 

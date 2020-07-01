@@ -32,7 +32,7 @@
             <form method="POST" action="conexao/salvausuario.php">
                 
             </form>
-            <button class="subnavbtn1" onclick="window.location.href ='http://localhost/TrabalhoWeb/listacarros.html';">Voltar </i></button>
+            <button class="subnavbtn1" onclick="window.location.href ='http://localhost/TrabalhoWeb/login.php';">Voltar </i></button>
         </div>
 
         <div class="rodape2 "> Seja bem vindo a LoCar Veículos!!!</div>

@@ -1,54 +1,27 @@
 <?php
-// Conexão
-require_once 'conexao.php';
+	session_start();	
+	//Incluindo a conexão com banco de dados
+	include_once("conexao.php");	
+	//O campo usuário e senha preenchido entra no if para validar
+	if (isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['senha']) && !empty($_POST['senha'])){
+		$login= mysqli_real_escape_string($conn, $_POST['login']); 
+		$senha = mysqli_real_escape_string($conn, $_POST['senha']);
+		$senha = md5($senha);
+		$result_usuario = "SELECT * FROM aut_usuarios WHERE login = '$login' && senha = '$senha' LIMIT 1";
+		$resultado_usuario = mysqli_query($conn, $result_usuario);
+		$resultado = mysqli_fetch_assoc($resultado_usuario);
+		var_dump(empty($resultado));
 
-// Sessão
-session_start();
+		if (empty($resultado)) { 
+			header("Location:http://localhost/TrabalhoWeb/login.php"); 
+			die;
+	   }
 
-// Botão enviar
-if(isset($_POST['btn-entrar'])):
-	$erros = array();
-	$login = mysqli_escape_string($conn, $_POST['login']);
-	$senha = mysqli_escape_string($conn, $_POST['senha']);
+		header("Location:http://localhost/TrabalhoWeb/cadastrolocacao.html");
 
-	if(isset($_POST['lembrar-senha'])):
-
-		setcookie('login', $login, time()+3600);
-		setcookie('senha', md5($senha), time()+3600);
-	endif;
-
-	if(empty($login) or empty($senha)):
-		$erros[] = "<li> O campo login/senha precisa ser preenchido </li>";
-	else:
-		// 105 OR 1=1 
-	    // 1; DROP TABLE teste
-
-		$sql = "SELECT login FROM aut_usuarios WHERE login = '$login'";
-		$resultado = mysqli_query($conn, $sql);		
-
-		if(mysqli_num_rows($resultado) > 0):
-		$senha = md5($senha);       
-		$sql = "SELECT * FROM aut_usuarios  WHERE login = '$login' AND senha = '$senha'";
-        header('Location: home.html');
-
-
-		$resultado = mysqli_query($conn, $sql);
-
-			if(mysqli_num_rows($resultado) == 1):
-				$dados = mysqli_fetch_array($resultado);
-				mysqli_close($conn);
-				$_SESSION['logado'] = true;
-				$_SESSION['id_usuario'] = $dados['id'];
-				header('Location: home.html');
-			else:
-				$erros[] = "<li> Usuário e senha não conferem </li>";
-			endif;
-
-		else:
-			$erros[] = "<li> Usuário inexistente </li>";
-		endif;
-
-	endif;
-
-endif;
+	}else {
+		$_SESSION['loginErro']= "Usuário ou senha inválido";
+  
+		header("Location:http://localhost/TrabalhoWeb/login.php");
+	}
 ?>
